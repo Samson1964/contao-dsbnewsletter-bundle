@@ -88,20 +88,6 @@ $GLOBALS['TL_DCA']['tl_newsletter_items'] = array
 				'icon'                => 'visible.svg',
 				'button_callback'     => array('tl_newsletter_items', 'toggleIcon')
 			),
-			//'toggle' => array
-			//(
-			//	'label'                => &$GLOBALS['TL_LANG']['tl_newsletter_items']['toggle'],
-			//	'attributes'           => 'onclick="Backend.getScrollOffset()"',
-			//	'haste_ajax_operation' => array
-			//	(
-			//		'field'            => 'invisible',
-			//		'options'          => array
-			//		(
-			//			array('value' => '1', 'icon' => 'invisible.svg'),
-			//			array('value' => '', 'icon' => 'visible.svg'),
-			//		),
-			//	),
-			//),
 			'show' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter_items']['show'],
@@ -181,7 +167,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_items'] = array
 			(
 				'filesOnly'           => true, 
 				'fieldType'           => 'radio',
-				'extensions'          => '%contao.image.valid_extensions%', 
+				'extensions'          => \Config::get('validImageTypes'), 
 				'mandatory'           => true, 
 				'tl_class'            => 'clr'
 			),
