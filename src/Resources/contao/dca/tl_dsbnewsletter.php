@@ -3,12 +3,12 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2024 Leo Feyer
  *
- * @package   Elo
+ * @package   DSB-Newsletter
  * @author    Frank Hoppe
  * @license   GNU/LPGL
- * @copyright Frank Hoppe 2016
+ * @copyright Frank Hoppe 2024
  */
 
 
@@ -46,9 +46,8 @@ $GLOBALS['TL_DCA']['tl_dsbnewsletter'] = array
 		),
 		'label' => array
 		(
-			'fields'                    => array('id', 'listmonth', 'datum', 'title'),
+			'fields'                    => array('datum', 'title'),
 			'showColumns'               => true,
-			//'label_callback'          => array('tl_dsbnewsletter', 'convertDate')
 		),
 		'global_operations' => array
 		(
@@ -65,7 +64,7 @@ $GLOBALS['TL_DCA']['tl_dsbnewsletter'] = array
 			'edit' => array
 			(
 				'label'                 => &$GLOBALS['TL_LANG']['tl_dsbnewsletter']['edit'],
-				'href'                  => 'table=tl_dsbnewsletter',
+				'href'                  => 'table=tl_dsbnewsletter_items',
 				'icon'                  => 'edit.gif',
 			),
 			'editheader' => array
@@ -114,7 +113,7 @@ $GLOBALS['TL_DCA']['tl_dsbnewsletter'] = array
 	'palettes' => array
 	(
 		'__selector__'                  => array(''),
-		'default'                       => '{title_legend},listmonth,title,datum;{publish_legend},published'
+		'default'                       => '{title_legend},title,datum;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -167,23 +166,6 @@ $GLOBALS['TL_DCA']['tl_dsbnewsletter'] = array
 				'tl_class'              => 'w50 widget'
 			),
 			'sql'                       => "int(10) unsigned NOT NULL default '0'"
-		),
-		'listmonth' => array
-		(
-			'label'                     => &$GLOBALS['TL_LANG']['tl_dsbnewsletter']['listmonth'],
-			'exclude'                   => true,
-			'default'                   => date('Ym'),
-			'filter'                    => true,
-			'search'                    => true,
-			'inputType'                 => 'text',
-			'flag'                      => 11,
-			'eval'                      => array
-			(
-				'mandatory'             => true,
-				'maxlength'             => 6,
-				'tl_class'              => 'w50'
-			),
-			'sql'                       => "int(6) unsigned NOT NULL default '0'"
 		),
 		'published' => array
 		(

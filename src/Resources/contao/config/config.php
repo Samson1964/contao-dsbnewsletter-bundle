@@ -26,8 +26,12 @@
 /**
  * Backend-Module
  */
-$GLOBALS['BE_MOD']['content']['dsbnewsletter'] = array
-(
-	'tables'                  => array('tl_dsbnewsletter', 'tl_dsbnewsletter_items'),
-	'icon'                    => 'bundles/contaodsbnewsletter/images/icon.png'
-);
+//$GLOBALS['BE_MOD']['content']['dsbnewsletter'] = array
+//(
+//	'tables'                  => array('tl_dsbnewsletter', 'tl_dsbnewsletter_items'),
+//	'icon'                    => 'bundles/contaodsbnewsletter/images/icon.png'
+//);
+
+$GLOBALS['BE_MOD']['content']['newsletter']['tables'][] = 'tl_newsletter_items';
+
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Schachbulle\ContaoDsbnewsletterBundle\Classes\NewsletterLaden', 'run');
