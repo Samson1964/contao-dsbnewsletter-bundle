@@ -1,5 +1,10 @@
 # DSB-Newsletter Changelog
 
+## Version 0.1.3 (2024-12-10)
+
+* Fix: Warning: Trying to access array offset on false in src/Classes/NewsletterLaden.php (line 82) 
+* Add: CSS-Klasse und CSS-ID bei den Inhaltselementen hinzugefügt
+
 ## Version 0.1.2 (2024-12-10)
 
 * Change: {{env::url}} ersetzt durch \Environment::get('url') in NewsletterLaden

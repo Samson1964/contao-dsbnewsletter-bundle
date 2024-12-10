@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_items'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useImage', 'overwriteMeta'),
-		'default'                     => '{title_legend},headline;{image_legend},useImage;{text_legend},text;{invisible_legend:hide},invisible'
+		'default'                     => '{title_legend},headline;{image_legend},useImage;{text_legend},text;{expert_legend:hide},cssID;{invisible_legend:hide},invisible'
 	),
 
 	// Subpalettes
@@ -236,6 +236,14 @@ $GLOBALS['TL_DCA']['tl_newsletter_items'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true),
 			'sql'                     => "char(1) COLLATE ascii_bin NOT NULL default ''"
+		),
+		'cssID' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_items']['cssID'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50 clr'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'invisible' => array
 		(

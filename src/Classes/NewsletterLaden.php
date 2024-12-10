@@ -56,8 +56,12 @@ class NewsletterLaden extends \Frontend
 				// Abschnitt hinzufügen, wenn nicht ausgeblendet
 				if(!$objContent->invisible)
 				{
+					// CSS-ID/Klasse extrahieren
+					$css = unserialize($objContent->cssID);
+					$cssID = $css[0];
+					$cssKlasse = $css[1];
 					// Neuen Abschnitt beginnen
-					$content .= '<div class="abschnitt">';
+					$content .= '<div id="'.$cssID.'" class="abschnitt '.$cssKlasse.'">';
 					// Überschrift extrahieren
 					$headline = unserialize($objContent->headline); // Bsp.: array('unit' => 'h2', 'value' => 'Überschrift')
 					if($headline['value'])
@@ -79,12 +83,16 @@ class NewsletterLaden extends \Frontend
 						else
 						{
 							$meta = unserialize($arrFile['meta']);
-							$bildunterschrift = $meta['de']['caption'];
+							$bildunterschrift = isset($meta['de']['caption']) ? $meta['de']['caption'] : '';
 						}
 						$content .= '<figure><img src="'.\Environment::get('url').'/'.$arrFile['path'].'"><figcaption>'.$bildunterschrift.'</figcaption></figure>';
 					}
 					// Text extrahieren
+					//log_message('==========================','dsbnewsletter.log');
+					//log_message($objContent->text,'dsbnewsletter.log');
 					$content .= \Controller::replaceInsertTags($objContent->text);
+					//log_message('--------------------------','dsbnewsletter.log');
+					//log_message($content1,'dsbnewsletter.log');
 					// Abschnitt beenden
 					$content .= '</div>';
 				}

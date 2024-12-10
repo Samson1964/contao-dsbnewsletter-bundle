@@ -18,6 +18,9 @@ $GLOBALS['TL_LANG']['tl_newsletter_items']['imageUrl'] = array('Bildlink-Adresse
 $GLOBALS['TL_LANG']['tl_newsletter_items']['caption'] = array('Bildunterschrift', 'Hier können Sie einen kurzen Text eingeben, der unterhalb des Bildes angezeigt wird.');
 $GLOBALS['TL_LANG']['tl_newsletter_items']['useImage'] = array('Ein Bild verwenden', 'Ein Bild verwenden. Es wird oberhalb des Textes angezeigt. Bitte verwenden Sie nur Bilder in Originalauflösung, die für den Newsletter aufbereitet wurden!');
 
+$GLOBALS['TL_LANG']['tl_newsletter_items']['expert_legend'] = 'Experteneinstellungen';
+$GLOBALS['TL_LANG']['tl_newsletter_items']['cssID'] = array('CSS-ID/Klasse', 'Hier können Sie eine ID und beliebig viele Klassen eingeben.');
+
 $GLOBALS['TL_LANG']['tl_newsletter_items']['invisible_legend'] = 'Sichtbarkeit';
 $GLOBALS['TL_LANG']['tl_newsletter_items']['invisible'] = array('Unsichtbar', 'Den Eintrag im Newsletter nicht anzeigen.');
 
