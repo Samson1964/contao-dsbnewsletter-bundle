@@ -81,10 +81,10 @@ class NewsletterLaden extends \Frontend
 							$meta = unserialize($arrFile['meta']);
 							$bildunterschrift = $meta['de']['caption'];
 						}
-						$content .= '<figure><img src="{{env::url}}/'.$arrFile['path'].'"><figcaption>'.$bildunterschrift.'</figcaption></figure>';
+						$content .= '<figure><img src="'.\Environment::get('url').'/'.$arrFile['path'].'"><figcaption>'.$bildunterschrift.'</figcaption></figure>';
 					}
 					// Text extrahieren
-					$content .= $objContent->text;
+					$content .= \Controller::replaceInsertTags($objContent->text);
 					// Abschnitt beenden
 					$content .= '</div>';
 				}
