@@ -5,8 +5,9 @@
 de:
     title: DSB-Newsletter
     description: >
-        Erweitert den Contao-Newsletter um die Anforderungen des Deutschen Schachbundes, unter anderem um automatisch zusammengestellte Nachrichtenübersichten.
+        Erweitert den Contao-Newsletter um frei sortierbare Inhaltselemente mit Überschrift, Bild und Text, wie sie der Deutsche Schachbund für seinen Newsletter benötigt.
     keywords:
         - Newsletter
         - DSB
+        - Inhaltselemente
         - Nachrichten

@@ -1,0 +1,18 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    # Die Migration wird ueber Autoconfiguration mit dem Tag `contao.migration`
+    # versehen; Contao 4.13 wie Contao 5 registrieren dafuer das
+    # MigrationInterface. Ein `_instanceof`-Eintrag auf
+    # Symfony\Component\DependencyInjection\ContainerAwareInterface stand hier
+    # frueher und ist entfallen: Die Schnittstelle wurde in Symfony 7
+    # (Contao 5.7) entfernt.
+    Schachbulle\ContaoDsbnewsletterBundle\Migration\:
+        resource: '../../Migration'
+
+# Der Insert-Tag haengt weiterhin ueber den Hook `replaceInsertTags` in
+# contao/config/config.php und wird von Contao mit System::importStatic()
+# erzeugt; ein Dienst ist dafuer nicht noetig.
