@@ -164,9 +164,9 @@ $GLOBALS['TL_DCA']['tl_newsletter_items'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			// Kein 'mandatory': ein Abschnitt darf auch nur aus Überschrift
-			// und Bild bestehen.
-			'eval'                    => array('rte'=>'tinyMCE', 'helpwizard'=>true),
+			// 'mandatory' ausdrücklich auf false: ein Abschnitt darf auch nur
+			// aus Überschrift und Bild bestehen.
+			'eval'                    => array('mandatory'=>false, 'rte'=>'tinyMCE', 'helpwizard'=>true),
 			'explanation'             => 'insertTags',
 			'sql'                     => "mediumtext NULL"
 		),
@@ -283,12 +283,35 @@ $GLOBALS['TL_DCA']['tl_newsletter_items'] = array
 class tl_newsletter_items
 {
 	/**
+	 * Schriftgrößen der Überschriftenebenen in der Backend-Vorschau.
+	 *
+	 * Die Werte bilden das Größenverhältnis von h1 bis h6 nach, damit sich die
+	 * Ebenen in der Liste auf einen Blick unterscheiden lassen. Sie sind bewusst
+	 * gedämpfter als im Frontend, damit eine h1 die Liste nicht sprengt.
+	 *
+	 * @var array<string,string>
+	 */
+	private static $arrHeadlineSizes = array
+	(
+		'h1' => '1.7em',
+		'h2' => '1.45em',
+		'h3' => '1.25em',
+		'h4' => '1.1em',
+		'h5' => '1em',
+		'h6' => '0.9em',
+	);
+
+	/**
 	 * Baut die Vorschauzeile eines Inhaltselements in der Backend-Liste.
 	 *
-	 * Angezeigt werden Überschrift, ein verkleinertes Vorschaubild — sofern am
-	 * Element eines hinterlegt ist — und der Textanfang. Die Höhe wird von
-	 * Contao begrenzt, sofern der Benutzer die Einstellung „Elemente nicht
-	 * einklappen" nicht gesetzt hat.
+	 * Angezeigt werden die Überschrift samt ihrer Ebene, ein verkleinertes
+	 * Vorschaubild — sofern am Element eines hinterlegt ist — und der
+	 * Textanfang. Die Überschrift steht in der Größe ihrer Ebene, damit sich
+	 * h1 bis h6 in der Liste unterscheiden lassen; die Kopfzeile nennt die
+	 * Ebene zusätzlich im Klartext.
+	 *
+	 * Die Höhe wird von Contao begrenzt, sofern der Benutzer die Einstellung
+	 * „Elemente nicht einklappen" nicht gesetzt hat.
 	 *
 	 * @param array<string,mixed> $arrRow Der Datensatz aus `tl_newsletter_items`
 	 *
@@ -300,10 +323,25 @@ class tl_newsletter_items
 
 		$arrHeadline = StringUtil::deserialize($arrRow['headline'] ?? null, true);
 		$strTitle = trim((string) ($arrHeadline['value'] ?? ''));
+		$strUnit = strtolower((string) ($arrHeadline['unit'] ?? 'h2'));
 
-		if ('' === $strTitle)
+		if (!isset(self::$arrHeadlineSizes[$strUnit]))
 		{
-			$strTitle = $GLOBALS['TL_LANG']['tl_newsletter_items']['noHeadline'] ?? '- ohne Überschrift -';
+			$strUnit = 'h2';
+		}
+
+		// Kopfzeile: die Ebene, oder der Hinweis auf die fehlende Überschrift
+		$strType = '' !== $strTitle
+			? strtoupper($strUnit)
+			: ($GLOBALS['TL_LANG']['tl_newsletter_items']['noHeadline'] ?? '- ohne Überschrift -');
+
+		$strHeadline = '';
+
+		if ('' !== $strTitle)
+		{
+			$strHeadline = '<div style="font-weight:bold;line-height:1.2;margin-bottom:6px;font-size:' . self::$arrHeadlineSizes[$strUnit] . '">'
+				. StringUtil::specialchars($strTitle)
+				. '</div>';
 		}
 
 		$strClass = 'limit_height';
@@ -322,9 +360,9 @@ class tl_newsletter_items
 		}
 
 		return '
-<div class="cte_type ' . $strKey . '">' . $strTitle . '</div>
+<div class="cte_type ' . $strKey . '">' . $strType . '</div>
 <div class="' . trim($strClass) . '">
-' . $strPreview . StringUtil::insertTagToSrc((string) ($arrRow['text'] ?? '')) . '
+' . $strHeadline . $strPreview . StringUtil::insertTagToSrc((string) ($arrRow['text'] ?? '')) . '
 </div>' . "\n";
 	}
 

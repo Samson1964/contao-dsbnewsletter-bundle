@@ -1,5 +1,14 @@
 # DSB-Newsletter Changelog
 
+## Version 1.1.0 (2026-08-30)
+
+* Add: Englische Sprachdateien für `tl_newsletter` und `tl_newsletter_items`.
+* Change: Die Backend-Vorschau hebt die Überschrift deutlich hervor und stellt sie in
+  der Größe ihrer Ebene dar; die Kopfzeile nennt die Ebene (H1 bis H6) im Klartext.
+  Überschriften werden dabei maskiert ausgegeben.
+* Change: `'mandatory' => false` steht am Textfeld jetzt ausdrücklich in der
+  Konfiguration, statt sich auf das Fehlen des Schlüssels zu verlassen.
+
 ## Version 1.0.0 (2026-08-28)
 
 * Add: Unterstützung für Contao 5.7 neben Contao 4.13; PHP bis einschließlich 8.4.
